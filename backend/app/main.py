@@ -22,7 +22,7 @@ app.add_middleware(
 
 
 class DigitRequest(BaseModel):
-    digit: int = Field(ge=1, le=9)
+    digit: int = Field(ge=0, le=9)
     sample: int = Field(default=1, ge=1)
 
 
@@ -37,6 +37,37 @@ class DigitRequest(BaseModel):
 # ---------------------------------------------------------
 
 DIGIT_PATTERNS = {
+    0: [
+        "0000001111111111110000000000",
+        "0000111111111111111100000000",
+        "0001111111111111111111000000",
+        "0011111110000001111111100000",
+        "0111111000000000011111110000",
+        "0111110000000000001111110000",
+        "1111110000000000000111111000",
+        "1111100000000000000011111000",
+        "1111100000000000000011111000",
+        "1111100000000000000011111000",
+        "1111100000000000000011111000",
+        "1111100000000000000011111000",
+        "1111100000000000000011111000",
+        "1111100000000000000011111000",
+        "1111100000000000000011111000",
+        "1111100000000000000011111000",
+        "1111100000000000000011111000",
+        "1111100000000000000011111000",
+        "1111100000000000000011111000",
+        "1111100000000000000011111000",
+        "1111110000000000000111111000",
+        "0111110000000000001111110000",
+        "0111111000000000011111110000",
+        "0011111110000001111111100000",
+        "0001111111111111111111000000",
+        "0000111111111111111100000000",
+        "0000001111111111110000000000",
+        "0000000000000000000000000000",
+    ],
+
     1: [
         "0000000011000000000000000000",
         "0000000111000000000000000000",
@@ -399,7 +430,7 @@ def health():
 @app.get("/digits")
 def digits():
     return {
-        "digits": list(range(1, 10)),
+        "digits": list(range(0, 10)),
         "samples_per_digit": 9,
     }
 
@@ -409,7 +440,7 @@ def generate(request: DigitRequest):
     if request.digit not in DIGIT_PATTERNS:
         raise HTTPException(
             status_code=400,
-            detail="Digit must be between 1 and 9",
+            detail="Digit must be between 0 and 9",
         )
 
     pattern = DIGIT_PATTERNS[request.digit]
@@ -433,10 +464,10 @@ def generate(request: DigitRequest):
 
 @app.post("/predict")
 def predict(request: DigitRequest):
-    if request.digit not in range(1, 10):
+    if request.digit not in range(0, 10):
         raise HTTPException(
             status_code=400,
-            detail="Digit must be between 1 and 9",
+            detail="Digit must be between 0 and 9",
         )
 
     return {

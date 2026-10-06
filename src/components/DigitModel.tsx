@@ -7,6 +7,26 @@ import type { Digit, DigitStroke, ViewerSettings } from '../types/digit'
  * Each digit is drawn as one connected path wherever possible.
  */
 const strokeMap: Record<Digit, DigitStroke[]> = {
+  0: [
+    [
+      [0.0, 1.4],
+      [-0.42, 1.3],
+      [-0.72, 0.95],
+      [-0.82, 0.45],
+      [-0.82, -0.45],
+      [-0.72, -0.95],
+      [-0.42, -1.3],
+      [0.0, -1.4],
+      [0.42, -1.3],
+      [0.72, -0.95],
+      [0.82, -0.45],
+      [0.82, 0.45],
+      [0.72, 0.95],
+      [0.42, 1.3],
+      [0.0, 1.4],
+    ],
+  ],
+
   1: [
     [
       [-0.35, 0.95],
